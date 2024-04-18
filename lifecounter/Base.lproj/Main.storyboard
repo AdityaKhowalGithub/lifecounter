@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +10,251 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="lifecounter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="center" fixedFrame="YES" axis="vertical" distribution="equalSpacing" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="h4e-nm-je0">
+                                <rect key="frame" x="82" y="131" width="229.66666666666663" height="594.66666666666663"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="V4a-IQ-fBf" userLabel="Player1Stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="229.66666666666666" height="179.66666666666666"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZiK-62-Idj">
+                                                <rect key="frame" x="38.666666666666671" y="0.0" width="152.66666666666663" height="44.333333333333336"/>
+                                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="34"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SYH-35-fpn" userLabel="Health Stackl">
+                                                <rect key="frame" x="40" y="66.333333333333329" width="150" height="57"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awa-ah-tKf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="53"/>
+                                                        <color key="tintColor" red="0.02217861958345229" green="0.69038036616161613" blue="2.2994285347853179e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="tinted" title="20">
+                                                            <fontDescription key="titleFontDescription" name="Futura-Bold" family="Futura" pointSize="30"/>
+                                                        </buttonConfiguration>
+                                                    </button>
+                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="Wjo-1E-nlY">
+                                                        <rect key="frame" x="0.0" y="53" width="150" height="4"/>
+                                                        <color key="tintColor" red="0.0" green="1" blue="0.30919555591367365" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </progressView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="L2R-px-MaS" userLabel="Button stack">
+                                                <rect key="frame" x="0.0" y="145.33333333333334" width="229.66666666666666" height="34.333333333333343"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Xk-mY-Dmn">
+                                                        <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="34.333333333333336"/>
+                                                        <color key="tintColor" red="0.00807503704" green="0.50402289629999997" blue="0.65626734499999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="+5"/>
+                                                        <connections>
+                                                            <action selector="Player1Plus5:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T9y-zy-IyV"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdx-Vk-S2g">
+                                                        <rect key="frame" x="61.666666666666671" y="0.0" width="44.666666666666671" height="34.333333333333336"/>
+                                                        <color key="tintColor" red="0.0" green="0.6856067777" blue="0.72524034979999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="+1"/>
+                                                        <connections>
+                                                            <action selector="Player1Plus1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VHU-h7-isn"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTC-gp-4Je">
+                                                        <rect key="frame" x="123.33333333333333" y="0.0" width="44.666666666666671" height="34.333333333333336"/>
+                                                        <color key="tintColor" red="0.99447661639999996" green="0.74323743673075326" blue="0.61124981812832435" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="-1"/>
+                                                        <connections>
+                                                            <action selector="Player1Minus1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LLv-uR-XJ5"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTL-jx-lBi">
+                                                        <rect key="frame" x="185" y="0.0" width="44.666666666666657" height="34.333333333333336"/>
+                                                        <color key="tintColor" red="0.94244199989999999" green="0.44394022230000002" blue="0.40531682969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="-5"/>
+                                                        <connections>
+                                                            <action selector="Player1Minus5:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lva-3i-l36"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="cCa-qh-kam" userLabel="Player2Stack">
+                                        <rect key="frame" x="0.0" y="279.66666666666669" width="229.66666666666666" height="179.66666666666669"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKm-mH-qX5">
+                                                <rect key="frame" x="38.666666666666671" y="0.0" width="152.66666666666663" height="44.333333333333336"/>
+                                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="34"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7R1-bd-lER">
+                                                <rect key="frame" x="40" y="66.333333333333314" width="150" height="57"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oc1-yH-rsi">
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="53"/>
+                                                        <color key="tintColor" red="0.02217861958" green="0.69038036619999998" blue="2.2994285349999999e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="tinted" title="20">
+                                                            <fontDescription key="titleFontDescription" name="Futura-Bold" family="Futura" pointSize="30"/>
+                                                        </buttonConfiguration>
+                                                    </button>
+                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="P1C-WB-FEY">
+                                                        <rect key="frame" x="0.0" y="53" width="150" height="4"/>
+                                                        <color key="tintColor" red="0.0" green="1" blue="0.30919555589999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </progressView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="pUq-nE-9Bq">
+                                                <rect key="frame" x="0.0" y="145.33333333333331" width="229.66666666666666" height="34.333333333333343"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IhX-Bq-0rU">
+                                                        <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="34.333333333333336"/>
+                                                        <color key="tintColor" red="0.00807503704" green="0.50402289629999997" blue="0.65626734499999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="+5"/>
+                                                        <connections>
+                                                            <action selector="Player2Plus5:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DcN-fg-6MU"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6Z-7z-Kfg">
+                                                        <rect key="frame" x="61.666666666666671" y="0.0" width="44.666666666666671" height="34.333333333333336"/>
+                                                        <color key="tintColor" red="0.0" green="0.6856067777" blue="0.72524034979999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="+1"/>
+                                                        <connections>
+                                                            <action selector="Player2Plus1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t8p-gj-iJJ"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VpW-4J-Pjy">
+                                                        <rect key="frame" x="123.33333333333333" y="0.0" width="44.666666666666671" height="34.333333333333336"/>
+                                                        <color key="tintColor" red="0.99447661639999996" green="0.74323743669999998" blue="0.61124981810000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="-1"/>
+                                                        <connections>
+                                                            <action selector="Player2Minus1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YqF-Ip-6CU"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59j-yH-u6N">
+                                                        <rect key="frame" x="185" y="0.0" width="44.666666666666657" height="34.333333333333336"/>
+                                                        <color key="tintColor" red="0.94244199989999999" green="0.44394022230000002" blue="0.40531682969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="-5"/>
+                                                        <connections>
+                                                            <action selector="Player2Minus5:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vJt-ci-fvo"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzT-kC-X1c">
+                                        <rect key="frame" x="81.666666666666657" y="559.33333333333337" width="66.666666666666657" height="35.333333333333371"/>
+                                        <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="27"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <variation key="heightClass=compact" axis="horizontal"/>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" red="0.99309116600000003" green="0.98658949139999996" blue="0.86189937589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="Label1" destination="ZiK-62-Idj" id="oR5-F0-440"/>
+                        <outlet property="Player1Health" destination="awa-ah-tKf" id="CsI-lk-SSV"/>
+                        <outlet property="Player1HealthBar" destination="Wjo-1E-nlY" id="BO7-ez-RSb"/>
+                        <outlet property="Player1Minus1" destination="fTC-gp-4Je" id="ssM-pf-xkN"/>
+                        <outlet property="Player1Minus5" destination="MTL-jx-lBi" id="LjZ-lm-WUq"/>
+                        <outlet property="Player1Plus1" destination="Gdx-Vk-S2g" id="zgX-t5-acy"/>
+                        <outlet property="Player1Plus5" destination="2Xk-mY-Dmn" id="w5V-4o-5N6"/>
+                        <outlet property="Player1Stack" destination="V4a-IQ-fBf" id="cJB-GH-5XN"/>
+                        <outlet property="Player2Health" destination="oc1-yH-rsi" id="o69-nM-mKn"/>
+                        <outlet property="Player2HealthBar" destination="P1C-WB-FEY" id="HDX-8w-EP6"/>
+                        <outlet property="Player2Minus1" destination="VpW-4J-Pjy" id="wIZ-DE-pFA"/>
+                        <outlet property="Player2Minus5" destination="59j-yH-u6N" id="asH-rl-GlN"/>
+                        <outlet property="Player2Plus1" destination="E6Z-7z-Kfg" id="v3s-3d-nvn"/>
+                        <outlet property="Player2Plus5" destination="IhX-Bq-0rU" id="QZX-Gg-QcB"/>
+                        <outlet property="PlayerStacks" destination="h4e-nm-je0" id="UFV-pa-JDE"/>
+                        <outlet property="WinnerLooser" destination="wzT-kC-X1c" id="dcb-Lq-2uF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="22" id="HFl-Pm-wAj">
+                    <rect key="frame" x="0.0" y="0.0" width="229.66666666666663" height="195.33333333333334"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjp-Jm-WgV">
+                            <rect key="frame" x="38.666666666666671" y="0.0" width="152.66666666666663" height="44.333333333333336"/>
+                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="34"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F22-Ms-fhU">
+                            <rect key="frame" x="40" y="66.333333333333314" width="150" height="72.666666666666686"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfI-Ze-KEC">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="15.666666666666666"/>
+                                    <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="12"/>
+                                    <color key="textColor" red="0.02733888479" green="0.85101010099999996" blue="2.8344330250000002e-16" alpha="0.31182740069999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7n-Y3-NMV">
+                                    <rect key="frame" x="0.0" y="15.666666666666671" width="150" height="53"/>
+                                    <color key="tintColor" red="0.02217861958" green="0.69038036619999998" blue="2.2994285349999999e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="tinted" title="20">
+                                        <fontDescription key="titleFontDescription" name="Futura-Bold" family="Futura" pointSize="30"/>
+                                    </buttonConfiguration>
+                                </button>
+                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SJ3-xo-Mt2">
+                                    <rect key="frame" x="0.0" y="68.666666666666671" width="150" height="4"/>
+                                </progressView>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="fnB-Fc-xSJ">
+                            <rect key="frame" x="0.0" y="161" width="229.66666666666666" height="34.333333333333343"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Fx-yD-lPt">
+                                    <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="34.333333333333336"/>
+                                    <color key="tintColor" red="0.00807503704" green="0.50402289629999997" blue="0.65626734499999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled" title="+5"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4o-js-nNT">
+                                    <rect key="frame" x="61.666666666666671" y="0.0" width="44.666666666666671" height="34.333333333333336"/>
+                                    <color key="tintColor" red="0.0" green="0.6856067777" blue="0.72524034979999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled" title="+1"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6Z-Oo-jND">
+                                    <rect key="frame" x="123.33333333333333" y="0.0" width="44.666666666666671" height="34.333333333333336"/>
+                                    <color key="tintColor" red="0.99447661639999996" green="0.74323743669999998" blue="0.61124981810000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled" title="-1"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ydp-6F-Lex">
+                                    <rect key="frame" x="185" y="0.0" width="44.666666666666657" height="34.333333333333336"/>
+                                    <color key="tintColor" red="0.94244199989999999" green="0.44394022230000002" blue="0.40531682969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled" title="-5"/>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="bXj-tl-2yb"/>
+                </stackView>
             </objects>
+            <point key="canvasLocation" x="119.84732824427481" y="-28.169014084507044"/>
         </scene>
     </scenes>
 </document>
