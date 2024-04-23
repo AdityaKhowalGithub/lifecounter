@@ -62,6 +62,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Setup the stepper for player count adjustment
         configureStepper()
@@ -74,6 +75,7 @@ class ViewController: UIViewController {
 
         // Add myView to the main view controller's view
         view.addSubview(myView)
+        
         
         
 
@@ -97,12 +99,17 @@ class ViewController: UIViewController {
             PlayerStacks.centerYAnchor.constraint(equalTo: myView.anotherView.centerYAnchor)
         ])
         playerStackView.spacing = 2
+        
     }
 
     @IBAction func HistoryClicked(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let historyViewController = storyboard.instantiateViewController(withIdentifier: "HistoryScreen")
+        let historyViewController = storyboard.instantiateViewController(withIdentifier: "HistoryScreen") as! HistoryViewController
+        
         self.present(historyViewController, animated: true, completion: nil)
+        historyViewController.addHistory(history: history)
+        
+        
         
     }
     
