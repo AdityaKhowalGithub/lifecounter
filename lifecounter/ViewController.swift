@@ -95,9 +95,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var PlayerPLus: UIButton!
     
     @IBOutlet weak var PlayerMinus: UIButton!
+    var gameStarted: Bool = false
+
     
     
     var players: [Player] = []
+    var history: [String] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -190,18 +194,32 @@ class ViewController: UIViewController {
         // This can be done by comparing sender with player.healthButton or using tags
         let playerIndex = sender.tag // assuming you set tags when creating players
         let modification = Int(VariableChangeP.text ?? "0") ?? 0
+        // Now disable the stepper to prevent adding new players
+       
+        if !gameStarted {
+            gameStarted = true
+            playerStepper.isHidden = true
+        }
 
         players[playerIndex].lifeCount += modification // adjust according to the button pressed (+/-)
         updateHealthBar(for: playerIndex)
     }
 
+//    func updateHealthBar(for index: Int) {
+//        guard index < players.count else { return }
+//        let player = players[index]
+//        let healthPercentage = Float(player.lifeCount) / 20.0  // Assuming max health is 20
+//        player.healthBar?.progress = healthPercentage
+//        player.healthButton?.setTitle("\(player.lifeCount)", for: .normal)
+//    }
     func updateHealthBar(for index: Int) {
         guard index < players.count else { return }
         let player = players[index]
-        let healthPercentage = Float(player.lifeCount) / 20.0  // Assuming max health is 20
+        let healthPercentage = Float(player.lifeCount) / 20.0 // Assuming max health is 20
         player.healthBar?.progress = healthPercentage
         player.healthButton?.setTitle("\(player.lifeCount)", for: .normal)
     }
+
 
 
 //    func createPlayerView(for player: inout Player, index: Int) -> UIStackView {
@@ -277,29 +295,38 @@ class ViewController: UIViewController {
         healthButton.tag = index
         player.healthButton = healthButton
 
+//        let healthTextField = UITextField()
+//          healthTextField.placeholder = "Enter value"
+//          healthTextField.font = UIFont(name: "Futura", size: 14)
+//          healthTextField.borderStyle = .roundedRect
+//          healthTextField.textAlignment = .center
+//          healthTextField.keyboardType = .numberPad  // Set to number pad
+//          healthTextField.tag = index
+//          player.healthTextField = healthTextField
         // Health Text Field
         let healthTextField = UITextField()
-        healthTextField.placeholder = "Enter value"
+        healthTextField.text = "5" // Set default text to "5"
         healthTextField.font = UIFont(name: "Futura", size: 14)
         healthTextField.borderStyle = .roundedRect
         healthTextField.textAlignment = .center
-        healthTextField.keyboardType = .numberPad
+        healthTextField.keyboardType = .numberPad  // Set to number pad
         healthTextField.tag = index
         player.healthTextField = healthTextField
 
-        // Plus Button
-        let plusButton = UIButton()
-        plusButton.setTitle("+", for: .normal)
-        plusButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 16)
-        plusButton.addTarget(self, action: #selector(adjustPlayerHealth(sender:)), for: .touchUpInside)
-        plusButton.tag = index
 
-        // Minus Button
-        let minusButton = UIButton()
-        minusButton.setTitle("-", for: .normal)
-        minusButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 16)
-        minusButton.addTarget(self, action: #selector(adjustPlayerHealth(sender:)), for: .touchUpInside)
-        minusButton.tag = index
+          // Plus Button
+          let plusButton = UIButton(type: .system)  // Ensure using .system to get a button with visible title
+          plusButton.setTitle("+", for: .normal)
+          plusButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 16)
+          plusButton.addTarget(self, action: #selector(adjustPlayerHealth(sender:)), for: .touchUpInside)
+          plusButton.tag = index
+
+          // Minus Button
+          let minusButton = UIButton(type: .system)  // Ensure using .system to get a button with visible title
+          minusButton.setTitle("-", for: .normal)
+          minusButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 16)
+          minusButton.addTarget(self, action: #selector(adjustPlayerHealth(sender:)), for: .touchUpInside)
+          minusButton.tag = index
 
         healthControlStack.addArrangedSubview(healthButton)
         healthControlStack.addArrangedSubview(healthTextField)
@@ -325,20 +352,50 @@ class ViewController: UIViewController {
 
         return playerStack
     }
+//    @objc func adjustPlayerHealth(sender: UIButton) {
+//        let playerIndex = sender.tag
+//        guard playerIndex < players.count else { return }
+//        var player = players[playerIndex]
+//        let adjustmentValue = Int(player.healthTextField?.text ?? "0") ?? 0
+//
+//        if sender.currentTitle == "+" {
+//            player.lifeCount += adjustmentValue
+//        } else if sender.currentTitle == "-" {
+//            player.lifeCount -= adjustmentValue
+//        }
+//
+//        updateHealthBar(for: playerIndex)
+//    }
     @objc func adjustPlayerHealth(sender: UIButton) {
         let playerIndex = sender.tag
         guard playerIndex < players.count else { return }
-        var player = players[playerIndex]
-        let adjustmentValue = Int(player.healthTextField?.text ?? "0") ?? 0
+        
+        guard let adjustmentValueString = players[playerIndex].healthTextField?.text,
+              let adjustmentValue = Int(adjustmentValueString),
+              adjustmentValue != 0 else {
+            // If the text field is empty, return or handle error as needed
+            return
+        }
 
         if sender.currentTitle == "+" {
-            player.lifeCount += adjustmentValue
+            players[playerIndex].lifeCount += adjustmentValue
+            history.append("Player \(playerIndex + 1) gained \(adjustmentValue) life.")
         } else if sender.currentTitle == "-" {
-            player.lifeCount -= adjustmentValue
+            players[playerIndex].lifeCount -= adjustmentValue
+            history.append("Player \(playerIndex + 1) lost \(adjustmentValue) life.")
         }
+        print(history)
+        print(gameStarted)
+        // Now disable the stepper to prevent adding new players
+        if !gameStarted {
+            gameStarted = true
+            playerStepper.isEnabled = false
+        }
+        
 
         updateHealthBar(for: playerIndex)
     }
+
 
     
     @objc func playerHealthButtonPressed(_ sender: UIButton) {
