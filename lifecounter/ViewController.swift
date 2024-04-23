@@ -166,13 +166,6 @@ class ViewController: UIViewController {
             }
         }
     }
-
-//    private func addNewPlayer() {
-//        let newPlayer = Player(lifeCount: 20) // Initialize with default health
-//        players.append(newPlayer)
-//        let newPlayerView = createPlayerView(for: newPlayer)
-//        playerStackView.addArrangedSubview(newPlayerView)
-//    }
     private func addNewPlayer() {
         var newPlayer = Player(lifeCount: 20)  // Initialize with default health
         let newPlayerView = createPlayerView(for: &newPlayer, index: players.count)
@@ -211,47 +204,141 @@ class ViewController: UIViewController {
     }
 
 
+//    func createPlayerView(for player: inout Player, index: Int) -> UIStackView {
+//        let playerStack = UIStackView()
+//        playerStack.axis = .vertical
+//        playerStack.spacing = 2 // Reduced spacing to fit more elements
+//        playerStack.distribution = .fillProportionally
+//        playerStack.alignment = .fill
+//
+//        // Player Name Label
+//        let playerNameLabel = UILabel()
+//        playerNameLabel.text = "Player \(index + 1)"
+//        playerNameLabel.textAlignment = .center
+//        playerNameLabel.font = UIFont(name: "Futura-Bold", size: 14) // Reduced font size to make it smaller
+//        playerStack.addArrangedSubview(playerNameLabel)
+//
+//        // Health Button
+//        let healthButton = UIButton(type: .system)
+//        healthButton.setTitle("20", for: .normal)
+//        healthButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 16) // Reduced font size
+//        healthButton.backgroundColor = UIColor.systemBlue
+//        healthButton.tintColor = UIColor.white
+//        healthButton.layer.cornerRadius = 5
+//        playerStack.addArrangedSubview(healthButton)
+//        healthButton.tag = index
+//        healthButton.addTarget(self, action: #selector(modifyPlayerHealth(sender:)), for: .touchUpInside)
+//        player.healthButton = healthButton
+//
+//        // Health Progress Bar
+//        let healthBar = UIProgressView(progressViewStyle: .default)
+//        healthBar.progress = 1.0
+//        healthBar.tintColor = UIColor.green
+//        playerStack.addArrangedSubview(healthBar)
+//        player.healthBar = healthBar
+//
+//        // Constraints for playerNameLabel, healthButton, and healthBar
+//        playerNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        healthButton.heightAnchor.constraint(equalToConstant: 35).isActive = true // Reduced button height
+//        healthBar.heightAnchor.constraint(equalToConstant: 3).isActive = true // Reduced progress bar height
+//
+//        return playerStack
+//    }
+
     func createPlayerView(for player: inout Player, index: Int) -> UIStackView {
         let playerStack = UIStackView()
         playerStack.axis = .vertical
-        playerStack.spacing = 2 // Reduced spacing to fit more elements
-        playerStack.distribution = .fillProportionally
+        playerStack.spacing = 2 // Reduced spacing
         playerStack.alignment = .fill
+        playerStack.distribution = .fillProportionally
 
         // Player Name Label
         let playerNameLabel = UILabel()
         playerNameLabel.text = "Player \(index + 1)"
+        playerNameLabel.font = UIFont(name: "Futura-Bold", size: 14)
         playerNameLabel.textAlignment = .center
-        playerNameLabel.font = UIFont(name: "Futura-Bold", size: 14) // Reduced font size to make it smaller
         playerStack.addArrangedSubview(playerNameLabel)
 
+        // Horizontal Stack View for health, text field, and plus/minus buttons
+        let healthControlStack = UIStackView()
+        healthControlStack.axis = .horizontal
+        healthControlStack.spacing = 2
+        healthControlStack.alignment = .center
+        healthControlStack.distribution = .fillProportionally
+
         // Health Button
-        let healthButton = UIButton(type: .system)
+        let healthButton = UIButton()
         healthButton.setTitle("20", for: .normal)
-        healthButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 16) // Reduced font size
+        healthButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 16)
         healthButton.backgroundColor = UIColor.systemBlue
         healthButton.tintColor = UIColor.white
         healthButton.layer.cornerRadius = 5
-        playerStack.addArrangedSubview(healthButton)
-        healthButton.tag = index
         healthButton.addTarget(self, action: #selector(modifyPlayerHealth(sender:)), for: .touchUpInside)
+        healthButton.tag = index
         player.healthButton = healthButton
+
+        // Health Text Field
+        let healthTextField = UITextField()
+        healthTextField.placeholder = "Enter value"
+        healthTextField.font = UIFont(name: "Futura", size: 14)
+        healthTextField.borderStyle = .roundedRect
+        healthTextField.textAlignment = .center
+        healthTextField.keyboardType = .numberPad
+        healthTextField.tag = index
+        player.healthTextField = healthTextField
+
+        // Plus Button
+        let plusButton = UIButton()
+        plusButton.setTitle("+", for: .normal)
+        plusButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 16)
+        plusButton.addTarget(self, action: #selector(adjustPlayerHealth(sender:)), for: .touchUpInside)
+        plusButton.tag = index
+
+        // Minus Button
+        let minusButton = UIButton()
+        minusButton.setTitle("-", for: .normal)
+        minusButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 16)
+        minusButton.addTarget(self, action: #selector(adjustPlayerHealth(sender:)), for: .touchUpInside)
+        minusButton.tag = index
+
+        healthControlStack.addArrangedSubview(healthButton)
+        healthControlStack.addArrangedSubview(healthTextField)
+        healthControlStack.addArrangedSubview(plusButton)
+        healthControlStack.addArrangedSubview(minusButton)
+
+        playerStack.addArrangedSubview(healthControlStack)
 
         // Health Progress Bar
         let healthBar = UIProgressView(progressViewStyle: .default)
         healthBar.progress = 1.0
         healthBar.tintColor = UIColor.green
-        playerStack.addArrangedSubview(healthBar)
         player.healthBar = healthBar
 
-        // Constraints for playerNameLabel, healthButton, and healthBar
-        playerNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        healthButton.heightAnchor.constraint(equalToConstant: 35).isActive = true // Reduced button height
-        healthBar.heightAnchor.constraint(equalToConstant: 3).isActive = true // Reduced progress bar height
+        playerStack.addArrangedSubview(healthBar)
+
+        // Set constraints for the new elements
+        healthButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        healthTextField.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        plusButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        minusButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        healthBar.heightAnchor.constraint(equalToConstant: 3).isActive = true
 
         return playerStack
     }
+    @objc func adjustPlayerHealth(sender: UIButton) {
+        let playerIndex = sender.tag
+        guard playerIndex < players.count else { return }
+        var player = players[playerIndex]
+        let adjustmentValue = Int(player.healthTextField?.text ?? "0") ?? 0
 
+        if sender.currentTitle == "+" {
+            player.lifeCount += adjustmentValue
+        } else if sender.currentTitle == "-" {
+            player.lifeCount -= adjustmentValue
+        }
+
+        updateHealthBar(for: playerIndex)
+    }
 
     
     @objc func playerHealthButtonPressed(_ sender: UIButton) {
@@ -264,164 +351,13 @@ class ViewController: UIViewController {
     }
 
 
-
-//    func createPlayerView(for player: Player) -> UIStackView {
-//        let playerStack = UIStackView()
-//        playerStack.axis = .vertical
-//        playerStack.distribution = .fillEqually
-//        playerStack.alignment = .fill
-//        playerStack.spacing = 10
-//        playerStack.translatesAutoresizingMaskIntoConstraints = false
-//
-//        // Player Label
-//        let playerNameLabel = UILabel()
-//        playerNameLabel.text = "Player"
-//        playerNameLabel.textAlignment = .center
-//        playerNameLabel.font = UIFont(name: "Futura-Bold", size: 34)
-//        playerStack.addArrangedSubview(playerNameLabel)
-//
-//        // Health Button
-//        let healthButton = UIButton(type: .system)
-//        healthButton.setTitle("20", for: .normal)
-//        healthButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 30)
-//        healthButton.backgroundColor = UIColor.systemBlue
-//        healthButton.tintColor = UIColor.white
-//        healthButton.layer.cornerRadius = 5
-//        player.healthButton = healthButton
-//        playerStack.addArrangedSubview(healthButton)
-//
-//        // Health Progress Bar
-//        let healthBar = UIProgressView(progressViewStyle: .default)
-//        healthBar.progress = 1.0 // start with full health
-//        healthBar.tintColor = UIColor.green
-//        player.healthBar = healthBar
-//        playerStack.addArrangedSubview(healthBar)
-//
-//        // Setup constraints for stack view
-//        playerNameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        healthButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        healthBar.heightAnchor.constraint(equalToConstant: 10).isActive = true
-//
-//        return playerStack
-//    }
-
-    // Implement game logic functions that iterate over `players`
-    // Example: func updateHealthBars() { ... }
 }
-
 struct Player {
     var lifeCount: Int
     var healthBar: UIProgressView?
     var healthButton: UIButton?
+    var healthTextField: UITextField?
 }
 
 
-//
-//    var player1Life = 20
-//    var player2Life = 20
-//    
-//    func getAT(s: Int) -> NSAttributedString {
-//        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Futura-Bold", size: 30.0)!]
-//        return NSAttributedString(string: "\(s)", attributes: attributes)
-//    }
-//    func updateHealthBars() {
-//        Player1Health.isUserInteractionEnabled = false
-//        Player2Health.isUserInteractionEnabled = false
-//        Player1Health.setAttributedTitle(getAT(s: player1Life), for: .normal)
-//        Player2Health.setAttributedTitle(getAT(s: player2Life), for: .normal)
-//        Player1HealthBar.progress = Float(player1Life) / 20.0
-//        Player2HealthBar.progress = Float(player2Life) / 20.0
-//    }
-//    func checkForWinner() {
-//        if player1Life <= 0 {
-//            WinnerLooser.text = "Player 1 LOSES!"
-//            WinnerLooser.isHidden = false
-//        } else if player2Life <= 0 {
-//            WinnerLooser.text = "Player 2 LOSES!"
-//            WinnerLooser.isHidden = false
-//        }
-//    }
-//    
-//    @IBAction func Player1Plus5(_ sender: Any) {
-//        // Safely convert the text to an integer. If conversion fails, default to adding 0.
-//        print(VariableChangeP.text ?? "pp")
-//        if let changeAmount = Int(VariableChangeP.text ?? "0") {
-//            player1Life += changeAmount
-//        } else {
-//            print("Invalid input: \(VariableChangeP.text ?? "nil")")
-//        }
-//        updateHealthBars()
-//        checkForWinner()
-//    }
-//    
-//    @IBAction func Player1Plus1(_ sender: Any) {
-//        player1Life += 1
-//        updateHealthBars()
-//        checkForWinner()
-//    }
-//    
-//    @IBAction func Player1Minus1(_ sender: Any) {
-//        player1Life -= 1
-//        updateHealthBars()
-//        checkForWinner()
-//    }
-//    
-//    @IBAction func Player1Minus5(_ sender: Any) {
-//        // Safely convert the text to an integer. If conversion fails, default to adding 0.
-//        if let changeAmount = Int(VariableChangeP.text ?? "0") {
-//            player1Life -= changeAmount
-//        } else {
-//            // Optionally handle the error case if the text is not a valid integer
-//            print("Invalid input: \(VariableChangeP.text ?? "nil")")
-//        }
-//        updateHealthBars()
-//        checkForWinner()
-//    }
-//    
-//    
-//    @IBAction func Player2Plus5(_ sender: Any) {
-//        if let changeAmount = Int(VariableChangeP.text ?? "0") {
-//            player2Life += changeAmount
-//        } else {
-//            print("Invalid input: \(VariableChangeP.text ?? "nil")")
-//        }
-//        updateHealthBars()
-//        checkForWinner()
-//    }
-//
-//    
-//    
-//    @IBAction func Player2Plus1(_ sender: Any) {
-//        player2Life += 1
-//        updateHealthBars()
-//        checkForWinner()
-//    }
-//    @IBAction func Player2Minus1(_ sender: Any) {
-//        player2Life -= 1
-//        updateHealthBars()
-//        checkForWinner()
-//    }
-//    
-//    @IBAction func Player2Minus5(_ sender: Any) {
-//        if let changeAmount = Int(VariableChangeP.text ?? "0") {
-//            player2Life -= changeAmount
-//        } else {
-//            print("Invalid input: \(VariableChangeP.text ?? "nil")")
-//        }
-//        updateHealthBars()
-//        checkForWinner()
-//    }
-//
-//    
-
-
-
-    
-    
-
-  
-    
-
-
-//}
 
