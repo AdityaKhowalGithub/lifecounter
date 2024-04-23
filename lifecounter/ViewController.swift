@@ -49,56 +49,14 @@ class MyView: UIView {
 class ViewController: UIViewController {
     let myView = MyView()
     
-        
-    
-    
+    @IBOutlet weak var HistoryButton: UIButton!
     @IBOutlet weak var playerStackView: UIStackView!
-    @IBOutlet weak var Label1: UILabel!
-   
     @IBOutlet weak var playerCountLabel: UILabel!
-    
     @IBOutlet weak var playerStepper: UIStepper!
-    @IBOutlet weak var Player1Stack: UIStackView!
-    
-    
-    
     @IBOutlet weak var PlayerStacks: UIStackView!
-    
-
-    @IBOutlet weak var Player1Health: UIButton!
-    
-    @IBOutlet weak var Player1Healt: UIStackView!
-    @IBOutlet weak var Player2Health: UIButton!
-    
-    @IBOutlet weak var Player2HealthBar: UIProgressView!
-    @IBOutlet weak var Player1Plus5: UIButton!
-    
-    @IBOutlet weak var Player1HealthBar: UIProgressView!
-    @IBOutlet weak var Player1Plus1: UIButton!
-    
-    @IBOutlet weak var Player1Minus1: UIButton!
-    
-    @IBOutlet weak var Player1Minus5: UIButton!
-    
-    @IBOutlet weak var Player2Plus5: UIButton!
-    
-    @IBOutlet weak var Player2Plus1: UIButton!
-    
-    @IBOutlet weak var Player2Minus1: UIButton!
-    
-    @IBOutlet weak var Player2Minus5: UIButton!
-    
     @IBOutlet weak var WinnerLooser: UILabel!
     
-    @IBOutlet weak var VariableChangeP: UITextField!
-    
-    @IBOutlet weak var PlayerPLus: UIButton!
-    
-    @IBOutlet weak var PlayerMinus: UIButton!
     var gameStarted: Bool = false
-
-    
-    
     var players: [Player] = []
     var history: [String] = []
 
@@ -141,7 +99,13 @@ class ViewController: UIViewController {
         playerStackView.spacing = 2
     }
 
-
+    @IBAction func HistoryClicked(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let historyViewController = storyboard.instantiateViewController(withIdentifier: "HistoryScreen")
+        self.present(historyViewController, animated: true, completion: nil)
+        
+    }
+    
 //    
     
     private func configureStepper() {
@@ -189,29 +153,6 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func modifyPlayerHealth(sender: UIButton) {
-        // Identify player associated with the button
-        // This can be done by comparing sender with player.healthButton or using tags
-        let playerIndex = sender.tag // assuming you set tags when creating players
-        let modification = Int(VariableChangeP.text ?? "0") ?? 0
-        // Now disable the stepper to prevent adding new players
-       
-        if !gameStarted {
-            gameStarted = true
-            playerStepper.isHidden = true
-        }
-
-        players[playerIndex].lifeCount += modification // adjust according to the button pressed (+/-)
-        updateHealthBar(for: playerIndex)
-    }
-
-//    func updateHealthBar(for index: Int) {
-//        guard index < players.count else { return }
-//        let player = players[index]
-//        let healthPercentage = Float(player.lifeCount) / 20.0  // Assuming max health is 20
-//        player.healthBar?.progress = healthPercentage
-//        player.healthButton?.setTitle("\(player.lifeCount)", for: .normal)
-//    }
     func updateHealthBar(for index: Int) {
         guard index < players.count else { return }
         let player = players[index]
@@ -221,47 +162,6 @@ class ViewController: UIViewController {
     }
 
 
-
-//    func createPlayerView(for player: inout Player, index: Int) -> UIStackView {
-//        let playerStack = UIStackView()
-//        playerStack.axis = .vertical
-//        playerStack.spacing = 2 // Reduced spacing to fit more elements
-//        playerStack.distribution = .fillProportionally
-//        playerStack.alignment = .fill
-//
-//        // Player Name Label
-//        let playerNameLabel = UILabel()
-//        playerNameLabel.text = "Player \(index + 1)"
-//        playerNameLabel.textAlignment = .center
-//        playerNameLabel.font = UIFont(name: "Futura-Bold", size: 14) // Reduced font size to make it smaller
-//        playerStack.addArrangedSubview(playerNameLabel)
-//
-//        // Health Button
-//        let healthButton = UIButton(type: .system)
-//        healthButton.setTitle("20", for: .normal)
-//        healthButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 16) // Reduced font size
-//        healthButton.backgroundColor = UIColor.systemBlue
-//        healthButton.tintColor = UIColor.white
-//        healthButton.layer.cornerRadius = 5
-//        playerStack.addArrangedSubview(healthButton)
-//        healthButton.tag = index
-//        healthButton.addTarget(self, action: #selector(modifyPlayerHealth(sender:)), for: .touchUpInside)
-//        player.healthButton = healthButton
-//
-//        // Health Progress Bar
-//        let healthBar = UIProgressView(progressViewStyle: .default)
-//        healthBar.progress = 1.0
-//        healthBar.tintColor = UIColor.green
-//        playerStack.addArrangedSubview(healthBar)
-//        player.healthBar = healthBar
-//
-//        // Constraints for playerNameLabel, healthButton, and healthBar
-//        playerNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        healthButton.heightAnchor.constraint(equalToConstant: 35).isActive = true // Reduced button height
-//        healthBar.heightAnchor.constraint(equalToConstant: 3).isActive = true // Reduced progress bar height
-//
-//        return playerStack
-//    }
 
     func createPlayerView(for player: inout Player, index: Int) -> UIStackView {
         let playerStack = UIStackView()
@@ -291,19 +191,9 @@ class ViewController: UIViewController {
         healthButton.backgroundColor = UIColor.systemBlue
         healthButton.tintColor = UIColor.white
         healthButton.layer.cornerRadius = 5
-        healthButton.addTarget(self, action: #selector(modifyPlayerHealth(sender:)), for: .touchUpInside)
         healthButton.tag = index
         player.healthButton = healthButton
 
-//        let healthTextField = UITextField()
-//          healthTextField.placeholder = "Enter value"
-//          healthTextField.font = UIFont(name: "Futura", size: 14)
-//          healthTextField.borderStyle = .roundedRect
-//          healthTextField.textAlignment = .center
-//          healthTextField.keyboardType = .numberPad  // Set to number pad
-//          healthTextField.tag = index
-//          player.healthTextField = healthTextField
-        // Health Text Field
         let healthTextField = UITextField()
         healthTextField.text = "5" // Set default text to "5"
         healthTextField.font = UIFont(name: "Futura", size: 14)
@@ -352,20 +242,7 @@ class ViewController: UIViewController {
 
         return playerStack
     }
-//    @objc func adjustPlayerHealth(sender: UIButton) {
-//        let playerIndex = sender.tag
-//        guard playerIndex < players.count else { return }
-//        var player = players[playerIndex]
-//        let adjustmentValue = Int(player.healthTextField?.text ?? "0") ?? 0
-//
-//        if sender.currentTitle == "+" {
-//            player.lifeCount += adjustmentValue
-//        } else if sender.currentTitle == "-" {
-//            player.lifeCount -= adjustmentValue
-//        }
-//
-//        updateHealthBar(for: playerIndex)
-//    }
+
     @objc func adjustPlayerHealth(sender: UIButton) {
         let playerIndex = sender.tag
         guard playerIndex < players.count else { return }
