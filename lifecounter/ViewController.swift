@@ -135,12 +135,13 @@ class ViewController: UIViewController {
     }
 
 
-    
+//    
     
     private func configureStepper() {
         playerStepper.minimumValue = 2
         playerStepper.maximumValue = 8
-        playerStepper.value = Double(players.count)
+        playerStepper.value = 4
+        //Double(players.count)
         playerStepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
     }
 
@@ -210,29 +211,30 @@ class ViewController: UIViewController {
     func createPlayerView(for player: inout Player, index: Int) -> UIStackView {
         let playerStack = UIStackView()
         playerStack.axis = .vertical
-        playerStack.spacing = 10
-        playerStack.distribution = .fill
-        playerStack.alignment = .center
+        playerStack.spacing = 5  // Reduced spacing
+        playerStack.distribution = .fillEqually
+        playerStack.alignment = .fill
         playerStack.translatesAutoresizingMaskIntoConstraints = false
 
         // Player Name Label
         let playerNameLabel = UILabel()
         playerNameLabel.text = "Player \(index + 1)"
         playerNameLabel.textAlignment = .center
-        playerNameLabel.font = UIFont(name: "Futura-Bold", size: 34)
+        playerNameLabel.font = UIFont(name: "Futura-Bold", size: 20) // Smaller font size
+        playerNameLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true // Smaller label height
         playerStack.addArrangedSubview(playerNameLabel)
 
         // Health Button
         let healthButton = UIButton(type: .system)
         healthButton.setTitle("20", for: .normal)
-        healthButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 30)
+        healthButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: 18) // Smaller font size
         healthButton.backgroundColor = UIColor.systemBlue
         healthButton.tintColor = UIColor.white
         healthButton.layer.cornerRadius = 5
         healthButton.translatesAutoresizingMaskIntoConstraints = false
-        healthButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        healthButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        healthButton.tag = index  // Set the tag to the index of the player
+        healthButton.heightAnchor.constraint(equalToConstant: 40).isActive = true  // Smaller button height
+        healthButton.widthAnchor.constraint(equalToConstant: 120).isActive = true  // Smaller button width
+        healthButton.tag = index
         healthButton.addTarget(self, action: #selector(playerHealthButtonPressed(_:)), for: .touchUpInside)
         playerStack.addArrangedSubview(healthButton)
         player.healthButton = healthButton
@@ -242,13 +244,10 @@ class ViewController: UIViewController {
         healthBar.progress = 1.0
         healthBar.tintColor = UIColor.green
         healthBar.translatesAutoresizingMaskIntoConstraints = false
+        healthBar.heightAnchor.constraint(equalToConstant: 5).isActive = true  // Thinner progress bar
         playerStack.addArrangedSubview(healthBar)
+        healthBar.widthAnchor.constraint(equalTo: healthButton.widthAnchor).isActive = true // Match width with the button
         player.healthBar = healthBar
-
-        // Constraint between button and progress bar width
-        // This should be done after both views are added to the playerStack.
-        healthBar.widthAnchor.constraint(equalTo: healthButton.widthAnchor).isActive = true
-        healthBar.heightAnchor.constraint(equalToConstant: 10).isActive = true
 
         return playerStack
     }
